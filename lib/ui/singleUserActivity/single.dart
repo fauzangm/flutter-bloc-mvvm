@@ -3,7 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvvm_flutter/bloc/GetSingleUser/SingleUserBloc.dart';
-import 'package:mvvm_flutter/model/SingleUser.dart';
+import 'package:mvvm_flutter/data/response/SingleUser.dart';
+import 'package:mvvm_flutter/ui/multiUserActivity/multiPage.dart';
 
 import '../../utils/componentUi/card_view.dart';
 
@@ -17,7 +18,11 @@ class SinglePage extends StatelessWidget {
         title: Text("MVVM with BLOC"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const MultiPage(),
+          ));
+        },
         child: Icon(Icons.supervised_user_circle_rounded),
       ),
       body: Column(
@@ -43,7 +48,7 @@ class SinglePage extends StatelessWidget {
             }
 
             if (state is SingleUserSucces) {
-              return UserCard(state.user);
+              return UserCard(state.user.data!);
             }
             return Container();
           }),

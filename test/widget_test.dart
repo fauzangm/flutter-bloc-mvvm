@@ -8,23 +8,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
+import 'package:mvvm_flutter/data/response/MultiUser.dart';
+import 'package:mvvm_flutter/data/response/SingleUser.dart';
 import 'dart:convert';
 import 'package:mvvm_flutter/main.dart';
-import 'package:mvvm_flutter/model/SingleUser.dart';
 
 void main() async {
-  Future<SingleUser> getSingleUserFromApi(int id) async {
-    Uri apiURL = Uri.parse("https://reqres.in/api/users/" + id.toString());
-
+  /** Get MULTI USER  */
+  Future<MultiUser> getMultiUserFromApi(int id) async {
+    Uri apiURL = Uri.parse("https://reqres.in/api/users?page=" + id.toString());
     var apiResult = await http.get(apiURL);
-    var jsonObject = json.decode(apiResult.body);
-    Map<String, dynamic> data =
-        (json.decode(apiResult.body) as Map<String, dynamic>);
-
-    var fakeData = SingleUser.fromJson(data);
-    print('${fakeData.data?.lastName}');
-    return SingleUser.fromJson(data);
+    Map<String, dynamic> jsonObject = json.decode(apiResult.body);
+    var fakeData = MultiUser.fromJson(jsonObject);
+    print('${fakeData.data?[0].firstName}');
+    return fakeData;
   }
 
-  await getSingleUserFromApi(1);
+  await getMultiUserFromApi(2);
+
+/** Get SINGLE USER */
+  // Future<SingleUser> getSingleUserFromApi(int id) async {
+  //   Uri apiURL = Uri.parse("https://reqres.in/api/users/" + id.toString());
+
+  //   var apiResult = await http.get(apiURL);
+  //   var jsonObject = json.decode(apiResult.body);
+  //   Map<String, dynamic> data =
+  //       (json.decode(apiResult.body) as Map<String, dynamic>);
+
+  //   var fakeData = SingleUser.fromJson(data);
+  //   print('${fakeData.data?.lastName}');
+  //   return SingleUser.fromJson(data);
+  // }
+
+  // await getSingleUserFromApi(1);
 }

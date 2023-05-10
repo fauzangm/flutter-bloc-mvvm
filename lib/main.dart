@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mvvm_flutter/model/SingleUser.dart';
 import 'package:mvvm_flutter/ui/singleUserActivity/single.dart';
 
 import 'bloc/GetSingleUser/SingleUserBloc.dart';

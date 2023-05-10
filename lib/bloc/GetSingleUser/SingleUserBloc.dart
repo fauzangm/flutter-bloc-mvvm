@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../../model/SingleUser.dart';
+import '../../data/response/SingleUser.dart';
 part 'SingleUserEvent.dart';
 part 'SingleUserState.dart';
 

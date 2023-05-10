@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../model/SingleUser.dart';
+import '../../data/model/DataUser.dart';
+import '../../data/response/SingleUser.dart';
 
 class UserCard extends StatelessWidget {
-  final SingleUser user;
+  final Data user;
 
   UserCard(this.user);
   @override
@@ -27,15 +28,14 @@ class UserCard extends StatelessWidget {
             margin: EdgeInsets.only(right: 10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                    image: NetworkImage("${user.data?.avatar}"))),
+                image: DecorationImage(image: NetworkImage("${user.avatar}"))),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("ID : ${user.data?.id}"),
-              Text("Nama : ${user.data?.firstName} ${user.data?.lastName}"),
-              Text("ID : ${user.data?.email}"),
+              Text("ID : ${user.id}"),
+              Text("Nama : ${user.firstName} ${user.lastName}"),
+              Text("ID : ${user.email}"),
             ],
           )
         ],
