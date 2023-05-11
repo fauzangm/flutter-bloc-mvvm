@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_flutter/common/color.dart';
 
-import '../../data/model/DataUser.dart';
-import '../../data/response/SingleUser.dart';
+import '../../data/remote/model/DataUser.dart';
+import '../../data/remote/response/SingleUser.dart';
 
 class UserCard extends StatelessWidget {
   final Data user;
@@ -11,21 +12,21 @@ class UserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.all(20),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-                color: Color(0x55000000), offset: Offset(1, 1), blurRadius: 7)
+                color: colorPrimaryDark, offset: Offset(1, 1), blurRadius: 7)
           ],
           borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.purple)),
+          border: Border.all(color: colorPrimaryLight)),
       child: Row(
         children: [
           Container(
             height: 75,
             width: 75,
-            margin: EdgeInsets.only(right: 10),
+            margin: const EdgeInsets.only(right: 10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(image: NetworkImage("${user.avatar}"))),

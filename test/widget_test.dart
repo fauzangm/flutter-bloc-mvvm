@@ -8,8 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
-import 'package:mvvm_flutter/data/response/MultiUser.dart';
-import 'package:mvvm_flutter/data/response/SingleUser.dart';
+import 'package:mvvm_flutter/data/remote/response/MultiUser.dart';
+import 'package:mvvm_flutter/data/remote/response/SingleUser.dart';
 import 'dart:convert';
 import 'package:mvvm_flutter/main.dart';
 

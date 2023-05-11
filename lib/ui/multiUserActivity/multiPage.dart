@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mvvm_flutter/bloc/GetMultiUser/MultiUserBloc.dart';
-import 'package:mvvm_flutter/data/api_service.dart';
+import 'package:mvvm_flutter/bloc/MultiUser/MultiUserBloc.dart';
+import 'package:mvvm_flutter/common/color.dart';
+import 'package:mvvm_flutter/data/remote/api_service.dart';
+import 'package:mvvm_flutter/data/repository/user/UserRepository.dart';
 import 'package:mvvm_flutter/utils/componentUi/card_view.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,9 +16,9 @@ class MultiPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Random random = Random();
     return BlocProvider(
-        create: (context) => MultiUserBloc(ApiService(client: http.Client()))
+        create: (context) => MultiUserBloc(UserRepository(http.Client()))
           ..add(GetMultiUserEvent(idpage: random.nextInt(3))),
-        child: ListMultiUserPage());
+        child: const ListMultiUserPage());
   }
 }
 
@@ -28,7 +30,13 @@ class ListMultiUserPage extends StatelessWidget {
     final Random random = Random();
     MultiUserBloc multiUserViewModel = BlocProvider.of<MultiUserBloc>(context);
     return Scaffold(
-      appBar: AppBar(title: Text("Multi User")),
+      appBar: AppBar(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20))),
+          backgroundColor: colorPrimary,
+          title: const Text("Multi User")),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,11 +48,12 @@ class ListMultiUserPage extends StatelessWidget {
                 },
                 child: Text("Pick Random Multi User"),
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: colorPrimary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             BlocConsumer<MultiUserBloc, MultiUserState>(
@@ -53,7 +62,7 @@ class ListMultiUserPage extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: Colors.blueAccent,
-                      duration: Duration(seconds: 5),
+                      duration: const Duration(seconds: 5),
                       //behavior mengatur jenis snackbar
                       behavior: SnackBarBehavior.fixed,
                       shape: RoundedRectangleBorder(
@@ -62,14 +71,14 @@ class ListMultiUserPage extends StatelessWidget {
                       content: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(Icons.info_outline),
+                          const Icon(Icons.info_outline),
                           Text(state.message),
                           GestureDetector(
                             onTap: () {
                               ScaffoldMessenger.of(context)
                                   .hideCurrentSnackBar();
                             },
-                            child: Icon(Icons.close),
+                            child: const Icon(Icons.close),
                           ),
                         ],
                       ),
