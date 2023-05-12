@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mvvm_flutter/data/remote/api_service.dart';
-import 'package:mvvm_flutter/data/repository/user/UserRepository.dart';
-import 'package:mvvm_flutter/ui/singleUserActivity/single.dart';
-import 'package:http/http.dart' as http;
-import 'bloc/SingleUser/SingleUserBloc.dart';
+import 'di/injection.dart' as di;
+import 'package:mvvm_flutter/utils/appRoute.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  di.init();
   runApp(const MyApp());
 }
 
@@ -18,10 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BlocProvider(
-        child: SinglePage(),
-        create: (context) => SingleUserBloc(UserRepository(http.Client())),
-      ),
+      home: _getMainWidget(),
     );
   }
 }
+
+Widget _getMainWidget() => AppRoute.singleUserActivity();

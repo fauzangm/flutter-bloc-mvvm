@@ -4,17 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvvm_flutter/bloc/SingleUser/SingleUserBloc.dart';
 import 'package:mvvm_flutter/common/color.dart';
-import 'package:mvvm_flutter/data/remote/response/SingleUser.dart';
 import 'package:mvvm_flutter/ui/loginActivity/loginPage.dart';
 import 'package:mvvm_flutter/ui/multiUserActivity/multiPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import '../../utils/appRoute.dart';
 import '../../utils/componentUi/card_view.dart';
 
 class SinglePage extends StatelessWidget {
+  const SinglePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
     final Random random = Random();
     SingleUserBloc userViewModel = BlocProvider.of<SingleUserBloc>(context);
     return Scaffold(
@@ -40,9 +41,11 @@ class SinglePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: colorPrimary,
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const MultiPage(),
-          ));
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AppRoute.multiUserActivity()),
+              (route) => true);
         },
         child: const Icon(Icons.supervised_user_circle_rounded),
       ),
@@ -79,18 +82,27 @@ class SinglePage extends StatelessWidget {
                     content: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(Icons.info_outline),
-                        Text(state.message),
+                        const Icon(Icons.info_outline),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          width: 280,
+                          child: Text(
+                            state.message,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                         GestureDetector(
                           onTap: () {
                             ScaffoldMessenger.of(context).hideCurrentSnackBar();
                           },
-                          child: Icon(Icons.close),
+                          child: const Icon(Icons.close),
                         ),
                       ],
                     ),
                   ),
                 );
+                print(state.message);
               }
             }, builder: (context, state) {
               if (state is SingleUserLoading) {
