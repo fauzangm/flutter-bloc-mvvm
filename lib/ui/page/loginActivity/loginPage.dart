@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter/common/color.dart';
 import 'package:mvvm_flutter/main.dart';
-import 'package:mvvm_flutter/ui/singleUserActivity/single.dart';
+import 'package:mvvm_flutter/ui/page/singleUserActivity/single.dart';
 
 import 'component/LoginForm.dart';
 

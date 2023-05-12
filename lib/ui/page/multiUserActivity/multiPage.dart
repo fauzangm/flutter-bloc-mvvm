@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mvvm_flutter/bloc/MultiUser/MultiUserBloc.dart';
+import '../../bloc/MultiUser/MultiUserBloc.dart';
 import 'package:mvvm_flutter/common/color.dart';
 import 'package:mvvm_flutter/data/remote/response/MultiUser.dart';
 import 'package:mvvm_flutter/utils/componentUi/card_view.dart';

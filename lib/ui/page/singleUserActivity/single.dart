@@ -2,14 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mvvm_flutter/bloc/SingleUser/SingleUserBloc.dart';
+import '../../bloc/SingleUser/SingleUserBloc.dart';
 import 'package:mvvm_flutter/common/color.dart';
-import 'package:mvvm_flutter/ui/loginActivity/loginPage.dart';
-import 'package:mvvm_flutter/ui/multiUserActivity/multiPage.dart';
+import 'package:mvvm_flutter/ui/page/loginActivity/loginPage.dart';
+import 'package:mvvm_flutter/ui/page/multiUserActivity/multiPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../utils/appRoute.dart';
-import '../../utils/componentUi/card_view.dart';
+import '../../../utils/appRoute.dart';
+import '../../../utils/componentUi/card_view.dart';
 
 class SinglePage extends StatelessWidget {
   const SinglePage({super.key});
@@ -27,6 +27,13 @@ class SinglePage extends StatelessWidget {
                   bottomRight: Radius.circular(20))),
           title: const Text("Single User"),
           actions: [
+            IconButton(
+                onPressed: () {
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //   builder: (context) => const LoginPage(),
+                  // ));
+                },
+                icon: const Icon(Icons.favorite)),
             Padding(
               padding: const EdgeInsets.only(right: 20),
               child: IconButton(

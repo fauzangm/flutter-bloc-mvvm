@@ -6,7 +6,7 @@ import 'package:mvvm_flutter/data/remote/api_service.dart';
 import 'package:mvvm_flutter/data/repository/user/UserRepository.dart';
 import 'package:mvvm_flutter/domain/usecase/getMultiUser.dart';
 
-import '../../data/remote/response/MultiUser.dart';
+import '../../../data/remote/response/MultiUser.dart';
 part 'MultiUserEvent.dart';
 part 'MultiUserState.dart';
 

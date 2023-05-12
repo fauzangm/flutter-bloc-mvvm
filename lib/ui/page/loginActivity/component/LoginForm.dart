@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter/common/color.dart';
-import 'package:mvvm_flutter/ui/singleUserActivity/single.dart';
+import 'package:mvvm_flutter/ui/page/singleUserActivity/single.dart';
 import 'package:rive/rive.dart';
 
-import '../../../common/color.dart';
-import '../../../utils/RiveUtils.dart';
+import '../../../../common/color.dart';
+import '../../../../main.dart';
+import '../../../../utils/RiveUtils.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -42,7 +43,7 @@ class _LoginFormState extends State<LoginForm> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SinglePage(),
+                  builder: (context) => const MyApp(),
                 ));
           });
         });

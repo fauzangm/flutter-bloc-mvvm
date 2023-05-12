@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mvvm_flutter/bloc/MultiUser/MultiUserBloc.dart';
-import 'package:mvvm_flutter/ui/loginActivity/loginPage.dart';
-import 'package:mvvm_flutter/ui/multiUserActivity/multiPage.dart';
+import 'package:mvvm_flutter/data/remote/model/DataUser.dart';
+import 'package:mvvm_flutter/ui/bloc/FavoriteItem/Favorite_bloc.dart';
+import 'package:mvvm_flutter/ui/bloc/MultiUser/MultiUserBloc.dart';
+import 'package:mvvm_flutter/ui/page/loginActivity/loginPage.dart';
+import 'package:mvvm_flutter/ui/page/multiUserActivity/multiPage.dart';
+import 'package:mvvm_flutter/utils/componentUi/card_view.dart';
 import '../di/injection.dart' as di;
-import '../bloc/SingleUser/SingleUserBloc.dart';
-import '../ui/singleUserActivity/single.dart';
+import '../ui/bloc/SingleUser/SingleUserBloc.dart';
+import '../ui/page/singleUserActivity/single.dart';
 
 class AppRoute {
   static Widget singleUserActivity() {
@@ -21,6 +24,13 @@ class AppRoute {
         child: const MultiPage());
     return nextScreen;
   }
+
+  // static Widget userCard() {
+  //   Widget nextScreen = BlocProvider(
+  //       create: (context) => di.locator<FavoriteBloc>(),
+  //       child: UserCard(Data as Data));
+  //   return nextScreen;
+  // }
 
   static Widget authActivity() {
     Widget nextScreen = const LoginPage();

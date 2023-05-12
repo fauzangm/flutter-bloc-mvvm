@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:equatable/equatable.dart';
 import 'package:mvvm_flutter/data/repository/user/UserRepository.dart';
 import 'package:mvvm_flutter/domain/usecase/getSingleUser.dart';
-import '../../data/remote/api_service.dart';
-import '../../data/remote/response/SingleUser.dart';
+import '../../../data/remote/api_service.dart';
+import '../../../data/remote/response/SingleUser.dart';
 part 'SingleUserEvent.dart';
 part 'SingleUserState.dart';
 

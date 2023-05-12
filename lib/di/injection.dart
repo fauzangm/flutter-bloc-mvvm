@@ -1,7 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
-import 'package:mvvm_flutter/bloc/MultiUser/MultiUserBloc.dart';
-import 'package:mvvm_flutter/bloc/SingleUser/SingleUserBloc.dart';
+import 'package:mvvm_flutter/ui/bloc/FavoriteItem/Favorite_bloc.dart';
+import 'package:mvvm_flutter/ui/bloc/MultiUser/MultiUserBloc.dart';
+import 'package:mvvm_flutter/ui/bloc/SingleUser/SingleUserBloc.dart';
 import 'package:mvvm_flutter/data/remote/api_service.dart';
 import 'package:mvvm_flutter/data/repository/user/UserRepository.dart';
 import 'package:mvvm_flutter/domain/repository/user/UserRepository.dart';
@@ -15,6 +16,7 @@ void init() {
   //BLOC
   locator.registerFactory(() => SingleUserBloc(locator()));
   locator.registerFactory(() => MultiUserBloc(locator()));
+  locator.registerFactory(() => FavoriteBloc());
 
   //Use Case
   locator.registerLazySingleton(() => GetSingleUser(locator()));
