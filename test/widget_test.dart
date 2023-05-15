@@ -8,23 +8,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
+import 'package:mvvm_flutter/data/remote/response/LoginResponse.dart';
 import 'package:mvvm_flutter/data/remote/response/MultiUser.dart';
 import 'package:mvvm_flutter/data/remote/response/SingleUser.dart';
 import 'dart:convert';
 import 'package:mvvm_flutter/main.dart';
 
 void main() async {
-  /** Get MULTI USER  */
-  Future<MultiUser> getMultiUserFromApi(int id) async {
-    Uri apiURL = Uri.parse("https://reqres.in/api/users?page=" + id.toString());
-    var apiResult = await http.get(apiURL);
-    Map<String, dynamic> jsonObject = json.decode(apiResult.body);
-    var fakeData = MultiUser.fromJson(jsonObject);
-    print('${fakeData.data?[0].firstName}');
-    return fakeData;
+  /** Post Login  */
+
+  Future<Login> postLoginUser(String email, String password) async {
+    final response = await http.post(
+      Uri.parse("https://reqres.in/api/login"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'username': email,
+        'password': password,
+      }),
+    );
+    var result = Login.fromJson(json.decode(response.body));
+    print(result.token);
+    return Login.fromJson(json.decode(response.body));
   }
 
-  await getMultiUserFromApi(2);
+  /** Get MULTI USER  */
+  // Future<MultiUser> getMultiUserFromApi(int id) async {
+  //   Uri apiURL = Uri.parse("https://reqres.in/api/users?page=" + id.toString());
+  //   var apiResult = await http.get(apiURL);
+  //   Map<String, dynamic> jsonObject = json.decode(apiResult.body);
+  //   var fakeData = MultiUser.fromJson(jsonObject);
+  //   print('${fakeData.data?[0].firstName}');
+  //   return fakeData;
+  // }
+
+  await postLoginUser("eve.holt@reqres.in", "cityslicka");
 
 /** Get SINGLE USER */
   // Future<SingleUser> getSingleUserFromApi(int id) async {

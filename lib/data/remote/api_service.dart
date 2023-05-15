@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
+import 'package:mvvm_flutter/data/remote/response/LoginResponse.dart';
 import 'package:mvvm_flutter/data/remote/response/MultiUser.dart';
 import 'package:mvvm_flutter/data/remote/response/SingleUser.dart';
 
@@ -8,10 +9,12 @@ import '../../common/exception.dart';
 
 const baseUrl = 'https://reqres.in/api/';
 const user = 'users';
+const login = 'login';
 
 abstract class ApiService {
   Future<SingleUser> getSingleUser(int id);
   Future<MultiUser> getMultiUser(int page);
+  Future<Login> postLoginUser(String email, String password);
 }
 
 class ApiServiceImpl implements ApiService {
@@ -36,9 +39,26 @@ class ApiServiceImpl implements ApiService {
     if (response.statusCode == 200) {
       Map<String, dynamic> data =
           (json.decode(response.body) as Map<String, dynamic>);
-      var result = SingleUser.fromJson(data);
-      print(result.data?.firstName);
       return SingleUser.fromJson(data);
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<Login> postLoginUser(String email, String password) async {
+    final response = await client.post(
+      Uri.parse("$baseUrl$login"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'username': email,
+        'password': password,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return Login.fromJson(json.decode(response.body));
     } else {
       throw ServerException();
     }

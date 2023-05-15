@@ -31,7 +31,6 @@ class UserRepositoryImpl implements UserRepository {
     try {
       final result = apiService.getSingleUser(id);
       var data = await result;
-      // Map<String, dynamic> data = (json.decode(result.);
       return Right(data);
     } catch (e) {
       return Left(e.toString());

@@ -26,6 +26,7 @@ class _MultiPageState extends State<MultiPage> {
 
   Widget build(BuildContext context) {
     MultiUserBloc multiUserViewModel = BlocProvider.of<MultiUserBloc>(context);
+
     void _onGetMultiUserEvent(MultiUser multiUser) {
       BlocProvider.of<MultiUserBloc>(context)
           .add(GetMultiUserEvent(idpage: random.nextInt(3)));

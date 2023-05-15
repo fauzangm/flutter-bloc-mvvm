@@ -38,9 +38,11 @@ class SinglePage extends StatelessWidget {
               padding: const EdgeInsets.only(right: 20),
               child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ));
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AppRoute.loginActivity()),
+                        (route) => true);
                   },
                   icon: const Icon(Icons.person_add_outlined)),
             )
@@ -48,11 +50,11 @@ class SinglePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: colorPrimary,
         onPressed: () {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => AppRoute.multiUserActivity()),
-              (route) => true);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AppRoute.multiUserActivity()),
+          );
         },
         child: const Icon(Icons.supervised_user_circle_rounded),
       ),

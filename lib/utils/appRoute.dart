@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvvm_flutter/data/remote/model/DataUser.dart';
 import 'package:mvvm_flutter/ui/bloc/FavoriteItem/Favorite_bloc.dart';
+import 'package:mvvm_flutter/ui/bloc/LoginUser/LoginUserBloc.dart';
 import 'package:mvvm_flutter/ui/bloc/MultiUser/MultiUserBloc.dart';
 import 'package:mvvm_flutter/ui/page/loginActivity/loginPage.dart';
 import 'package:mvvm_flutter/ui/page/multiUserActivity/multiPage.dart';
@@ -32,11 +33,10 @@ class AppRoute {
   //   return nextScreen;
   // }
 
-  static Widget authActivity() {
-    Widget nextScreen = const LoginPage();
-    // BlocProvider(
-    //     create: (context) => di.locator<MultiUserBloc>(),
-    //     child: const MultiPage());
+  static Widget loginActivity() {
+    Widget nextScreen = BlocProvider(
+        create: (context) => di.locator<LoginUserBloc>(),
+        child: const LoginPage());
     return nextScreen;
   }
 }
