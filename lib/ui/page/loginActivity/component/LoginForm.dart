@@ -5,9 +5,11 @@ import 'package:mvvm_flutter/ui/page/singleUserActivity/single.dart';
 import 'package:mvvm_flutter/utils/appRoute.dart';
 import 'package:rive/rive.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../common/color.dart';
 import '../../../../main.dart';
 import '../../../../utils/RiveUtils.dart';
+import '../../../../utils/componentUi/customPositionAnimated.dart';
 
 class LoginForm extends StatefulWidget {
   final LoginUserBloc loginViewModel;
@@ -190,38 +192,12 @@ class _LoginFormState extends State<LoginForm> {
       isShowLoading = true;
       isShowCongrats = true;
     });
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       if (_formkey.currentState!.validate()) {
         _onLoginClick();
-        // if (state is LoginUserError) {
-        //   error.fire();
-        //   Future.delayed(Duration(seconds: 2), () {
-        //     setState(() {
-        //       isShowLoading = false;
-        //     });
-        //   });
-        // }
-        // if (state is LoginUserSucces) {
-        //   check.fire();
-        //   Future.delayed(Duration(seconds: 2), () {
-        //     setState(() {
-        //       isShowLoading = false;
-        //     });
-
-        //     congrast.fire();
-
-        //     Future.delayed(Duration(seconds: 1), () {
-        //       Navigator.push(
-        //           context,
-        //           MaterialPageRoute(
-        //             builder: (context) => const MyApp(),
-        //           ));
-        //     });
-        //   });
-        // }
       } else {
         error.fire();
-        Future.delayed(Duration(seconds: 2), () {
+        Future.delayed(const Duration(seconds: 2), () {
           setState(() {
             isShowLoading = false;
           });
@@ -241,12 +217,18 @@ class _LoginFormState extends State<LoginForm> {
       BlocProvider.of<LoginUserBloc>(context).add(LoginEventClick());
     } else {
       error.fire();
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 2), () {
         setState(() {
           isShowLoading = false;
         });
       });
     }
+  }
+
+  void setIsLoginPref(String token) async {
+    final sharedpref = await SharedPreferences.getInstance();
+    sharedpref.setBool('isLogin', true);
+    sharedpref.setString('isToken', token);
   }
 
   Future<void> _onLoginBlocListener(
@@ -257,15 +239,16 @@ class _LoginFormState extends State<LoginForm> {
           passwordController.text,
           email: emailController.text));
     } else if (state is LoginUserSucces) {
+      setIsLoginPref(state.user.token!);
       check.fire();
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 2), () {
         setState(() {
           isShowLoading = false;
         });
 
         congrast.fire();
 
-        Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(const Duration(seconds: 1), () {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
@@ -275,7 +258,7 @@ class _LoginFormState extends State<LoginForm> {
       });
     } else if (state is LoginUserError) {
       error.fire();
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 2), () {
         setState(() {
           isShowLoading = false;
           ScaffoldMessenger.of(context).showSnackBar(
@@ -300,12 +283,6 @@ class _LoginFormState extends State<LoginForm> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    },
-                    child: const Icon(Icons.close),
-                  ),
                 ],
               ),
             ),
@@ -315,31 +292,5 @@ class _LoginFormState extends State<LoginForm> {
       debugPrint(
           'LoginStateError, ${state.message} email : ${emailController.text} pass : ${passwordController.text}');
     }
-  }
-}
-
-class CustomPositioned extends StatelessWidget {
-  const CustomPositioned({super.key, required this.child, this.size = 100});
-
-  final Widget child;
-  final double size;
-  @override
-  Widget build(BuildContext context) {
-    return Positioned.fill(
-        child: Column(
-      children: [
-        const Spacer(
-            // flex: 2,
-            ),
-        SizedBox(
-          height: 100,
-          width: 100,
-          child: child,
-        ),
-        const Spacer(
-          flex: 2,
-        ),
-      ],
-    ));
   }
 }

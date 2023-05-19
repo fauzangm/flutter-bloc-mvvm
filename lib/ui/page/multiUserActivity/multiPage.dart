@@ -95,7 +95,7 @@ class GetMultiUser extends StatelessWidget {
         if (state is MultiUserError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Colors.blueAccent,
+              backgroundColor: colorPrimary,
               duration: const Duration(seconds: 5),
               //behavior mengatur jenis snackbar
               behavior: SnackBarBehavior.fixed,

@@ -1,7 +1,9 @@
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 import 'package:mvvm_flutter/domain/repository/auth/LoginRepository.dart';
+import 'package:mvvm_flutter/domain/usecase/createUser.dart';
 import 'package:mvvm_flutter/domain/usecase/postLoginUser.dart';
+import 'package:mvvm_flutter/ui/bloc/CreateUser/CreateUserBloc.dart';
 import 'package:mvvm_flutter/ui/bloc/FavoriteItem/Favorite_bloc.dart';
 import 'package:mvvm_flutter/ui/bloc/LoginUser/LoginUserBloc.dart';
 import 'package:mvvm_flutter/ui/bloc/MultiUser/MultiUserBloc.dart';
@@ -23,11 +25,13 @@ void init() {
   locator.registerFactory(() => MultiUserBloc(locator()));
   locator.registerFactory(() => LoginUserBloc(locator()));
   locator.registerFactory(() => FavoriteBloc());
+  locator.registerFactory(() => CreateUserBloc(locator()));
 
   //Use Case
   locator.registerLazySingleton(() => GetSingleUser(locator()));
   locator.registerLazySingleton(() => GetMultiUser(locator()));
   locator.registerLazySingleton(() => PostLoginUser(locator()));
+  locator.registerLazySingleton(() => CreateUserUseCase(locator()));
 
   //Repository
   locator.registerLazySingleton<UserRepository>(

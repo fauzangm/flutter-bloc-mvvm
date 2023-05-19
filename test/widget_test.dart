@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
+import 'package:mvvm_flutter/data/remote/response/CreateAkunResponse.dart';
 import 'package:mvvm_flutter/data/remote/response/LoginResponse.dart';
 import 'package:mvvm_flutter/data/remote/response/MultiUser.dart';
 import 'package:mvvm_flutter/data/remote/response/SingleUser.dart';
@@ -15,23 +16,40 @@ import 'dart:convert';
 import 'package:mvvm_flutter/main.dart';
 
 void main() async {
-  /** Post Login  */
+  /** Create User */
 
-  Future<Login> postLoginUser(String email, String password) async {
+  Future<CreateUser> postCreatUser(String name, String job) async {
     final response = await http.post(
-      Uri.parse("https://reqres.in/api/login"),
+      Uri.parse("https://reqres.in/api/users"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'username': email,
-        'password': password,
+        'name': name,
+        'job': job,
       }),
     );
-    var result = Login.fromJson(json.decode(response.body));
-    print(result.token);
-    return Login.fromJson(json.decode(response.body));
+    var result = CreateUser.fromJson(json.decode(response.body));
+    print(result.name);
+    return result;
   }
+  /** Post Login  */
+
+  // Future<Login> postLoginUser(String email, String password) async {
+  //   final response = await http.post(
+  //     Uri.parse("https://reqres.in/api/login"),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json; charset=UTF-8',
+  //     },
+  //     body: jsonEncode(<String, String>{
+  //       'username': email,
+  //       'password': password,
+  //     }),
+  //   );
+  //   var result = Login.fromJson(json.decode(response.body));
+  //   print(result.token);
+  //   return Login.fromJson(json.decode(response.body));
+  // }
 
   /** Get MULTI USER  */
   // Future<MultiUser> getMultiUserFromApi(int id) async {
@@ -43,7 +61,7 @@ void main() async {
   //   return fakeData;
   // }
 
-  await postLoginUser("eve.holt@reqres.in", "cityslicka");
+  await postCreatUser("eve yun", "Admin");
 
 /** Get SINGLE USER */
   // Future<SingleUser> getSingleUserFromApi(int id) async {

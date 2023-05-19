@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvvm_flutter/data/remote/model/DataUser.dart';
+import 'package:mvvm_flutter/ui/bloc/CreateUser/CreateUserBloc.dart';
 import 'package:mvvm_flutter/ui/bloc/FavoriteItem/Favorite_bloc.dart';
 import 'package:mvvm_flutter/ui/bloc/LoginUser/LoginUserBloc.dart';
 import 'package:mvvm_flutter/ui/bloc/MultiUser/MultiUserBloc.dart';
+import 'package:mvvm_flutter/ui/page/addUser/addUserPage.dart';
 import 'package:mvvm_flutter/ui/page/loginActivity/loginPage.dart';
 import 'package:mvvm_flutter/ui/page/multiUserActivity/multiPage.dart';
 import 'package:mvvm_flutter/utils/componentUi/card_view.dart';
@@ -23,6 +25,13 @@ class AppRoute {
     Widget nextScreen = BlocProvider(
         create: (context) => di.locator<MultiUserBloc>(),
         child: const MultiPage());
+    return nextScreen;
+  }
+
+  static Widget addUserActivity() {
+    Widget nextScreen = BlocProvider(
+        create: (context) => di.locator<CreateUserBloc>(),
+        child: const AddUserPage());
     return nextScreen;
   }
 
