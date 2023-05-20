@@ -1,3 +1,5 @@
+import '../../../utils/constant.dart';
+
 class Data {
   int? id;
   String? email;
@@ -24,4 +26,11 @@ class Data {
     data['avatar'] = this.avatar;
     return data;
   }
+
+  static String createTableQuery() => '''CREATE TABLE ${TableRes.menu} (
+      ${FieldRes.id} TEXT PRIMARY KEY,
+      ${FieldRes.avatar} TEXT,
+       ${FieldRes.email} TEXT,
+      ${FieldRes.firstName} TEXT,
+      ${FieldRes.lastName} TEXT,''';
 }

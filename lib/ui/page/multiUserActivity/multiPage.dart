@@ -109,18 +109,18 @@ class GetMultiUser extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(10),
                     width: 280,
-                    child: Text(
-                      state.message,
+                    child: const Text(
+                      "Gagal Menghubungi Server, Harap Periksa Koneksi Internet Kamu",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    },
-                    child: const Icon(Icons.close),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  //   },
+                  //   child: const Icon(Icons.close),
+                  // ),
                 ],
               ),
             ),

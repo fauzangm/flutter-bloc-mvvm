@@ -132,7 +132,7 @@ class SinglePage extends StatelessWidget {
               if (state is SingleUserError) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    backgroundColor: Colors.blueAccent,
+                    backgroundColor: colorbgPrimary,
                     duration: const Duration(seconds: 5),
                     //behavior mengatur jenis snackbar
                     behavior: SnackBarBehavior.fixed,
@@ -146,18 +146,18 @@ class SinglePage extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(10),
                           width: 280,
-                          child: Text(
-                            state.message,
+                          child: const Text(
+                            "Gagal Menghubungi Server, Harap Periksa Koneksi Internet Kamu",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          },
-                          child: const Icon(Icons.close),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        //   },
+                        //   child: const Icon(Icons.close),
+                        // ),
                       ],
                     ),
                   ),

@@ -45,6 +45,8 @@ class _addUserPageState extends State<AddUserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // fix bug bottom overflowed
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: colorPrimary,
         shape: const RoundedRectangleBorder(
@@ -263,7 +265,7 @@ class _addUserPageState extends State<AddUserPage> {
               context,
               MaterialPageRoute(
                   builder: (context) => AppRoute.singleUserActivity()),
-              (route) => true);
+              (route) => false);
         });
       });
     } else if (state is CreateUserError) {
