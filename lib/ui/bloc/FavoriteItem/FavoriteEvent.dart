@@ -16,3 +16,5 @@ class InsertFavoriteEvent extends FavoriteUserEvent {
 class FavoriteEventClick extends FavoriteUserEvent {}
 
 class ClearDbFavoriteEvent extends FavoriteUserEvent {}
+
+class GetFavoriteEvent extends FavoriteUserEvent {}

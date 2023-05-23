@@ -1,4 +1,5 @@
 import 'package:mvvm_flutter/data/remote/model/DataUser.dart';
+import 'package:mvvm_flutter/utils/constant.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as pathdart;
 
@@ -18,7 +19,7 @@ class DatabaseHelper {
   Future<Database> initializeDb() async {
     String path = await getDatabasesPath();
     Database database = await openDatabase('$path/favorite.db',
-        onCreate: _onCreate, version: 2);
+        onCreate: _onCreate, version: 4);
     return database;
   }
 
@@ -39,19 +40,20 @@ class DatabaseHelper {
   }
 
   Future<void> clearDatabase() async {
-    String dbPath = await getDatabasesPath();
-    String path = pathdart.join(dbPath, 'your_database.db');
-    await deleteDatabase(path);
+    Database db = await database;
+    await db.delete(TableRes.menu);
   }
 
-  Future<List<Map<String, dynamic>>> getDataList(String tableName,
-      {List<String>? columns, String? where, List<Object?>? whereArgs}) async {
+  Future<List<Map<String, dynamic>>> getDataList() async {
     Database db = await database;
-    return await db.query(
-      tableName,
-      columns: columns,
-      where: where,
-      whereArgs: whereArgs,
-    );
+    List<Map<String, dynamic>> allFavorite = await db.query(TableRes.menu);
+    return allFavorite;
+
+    // return await db.query(
+    //   tableName,
+    //   columns: columns,
+    //   where: where,
+    //   whereArgs: whereArgs,
+    // );
   }
 }

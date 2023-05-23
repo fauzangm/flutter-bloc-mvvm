@@ -53,16 +53,16 @@ class __SingleUserPageState extends State<_SingleUserPage> {
     await prefs.remove('isToken');
   }
 
-  void initState() {
-    super.initState();
-    clearDbFavorite(); // Panggil fungsi di sini
-  }
+  // void initState() {
+  //   super.initState();
+  //   clearDbFavorite(); // Panggil fungsi di sini
+  // }
 
-  void clearDbFavorite() {
-    FavoriteUserBloc favoriteViewModel =
-        BlocProvider.of<FavoriteUserBloc>(context);
-    favoriteViewModel.add(ClearDbFavoriteEvent());
-  }
+  // void clearDbFavorite() {
+  //   FavoriteUserBloc favoriteViewModel =
+  //       BlocProvider.of<FavoriteUserBloc>(context);
+  //   favoriteViewModel.add(ClearDbFavoriteEvent());
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -110,9 +110,12 @@ class __SingleUserPageState extends State<_SingleUserPage> {
               ),
               IconButton(
                   onPressed: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //   builder: (context) => const LoginPage(),
-                    // ));
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AppRoute.myFavoritePage()),
+                      (route) => true,
+                    );
                   },
                   icon: const Icon(Icons.favorite)),
               FutureBuilder(

@@ -20,8 +20,7 @@ class LocalDataSource {
 
   Future<List<Data>> getFavoriteItem() async {
     try {
-      List<Map<String, dynamic>> result =
-          await _databaseHelper.getDataList(TableRes.menu);
+      List<Map<String, dynamic>> result = await _databaseHelper.getDataList();
       return result.map((e) => Data.fromMap(e)).toList();
     } catch (e) {
       rethrow;

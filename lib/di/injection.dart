@@ -5,6 +5,7 @@ import 'package:mvvm_flutter/domain/repository/auth/LoginRepository.dart';
 import 'package:mvvm_flutter/domain/repository/favorite/favoriteRepository.dart';
 import 'package:mvvm_flutter/domain/usecase/clearDatabaseFavorite.dart';
 import 'package:mvvm_flutter/domain/usecase/createUser.dart';
+import 'package:mvvm_flutter/domain/usecase/getFavoriteUseCase.dart';
 import 'package:mvvm_flutter/domain/usecase/postLoginUser.dart';
 import 'package:mvvm_flutter/ui/bloc/CreateUser/CreateUserBloc.dart';
 import 'package:mvvm_flutter/ui/bloc/FavoriteItem/FavoriteBloc.dart';
@@ -30,7 +31,8 @@ void init() {
   locator.registerFactory(() => SingleUserBloc(locator()));
   locator.registerFactory(() => MultiUserBloc(locator()));
   locator.registerFactory(() => LoginUserBloc(locator()));
-  locator.registerFactory(() => FavoriteUserBloc(locator(), locator()));
+  locator
+      .registerFactory(() => FavoriteUserBloc(locator(), locator(), locator()));
   locator.registerFactory(() => CreateUserBloc(locator()));
 
   //Use Case
@@ -40,6 +42,7 @@ void init() {
   locator.registerLazySingleton(() => CreateUserUseCase(locator()));
   locator.registerLazySingleton(() => InsertFavoriteItem(locator()));
   locator.registerLazySingleton(() => ClearDBFavoriteUseCase(locator()));
+  locator.registerLazySingleton(() => GetFavoriteUseCase(locator()));
 
   //Repository
   locator.registerLazySingleton<UserRepository>(

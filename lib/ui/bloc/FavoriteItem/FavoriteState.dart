@@ -23,6 +23,15 @@ class FavoriteSucces extends FavoriteItemState {
   List<Object> get props => [succes];
 }
 
+class GetFavoriteSucces extends FavoriteItemState {
+  final List<Data> data;
+
+  GetFavoriteSucces({required this.data});
+
+  @override
+  List<Object> get props => [data];
+}
+
 class FavoriteError extends FavoriteItemState {
   final String message;
 

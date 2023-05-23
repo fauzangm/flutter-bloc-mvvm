@@ -8,6 +8,7 @@ import 'package:mvvm_flutter/ui/bloc/MultiUser/MultiUserBloc.dart';
 import 'package:mvvm_flutter/ui/page/addUser/addUserPage.dart';
 import 'package:mvvm_flutter/ui/page/loginActivity/loginPage.dart';
 import 'package:mvvm_flutter/ui/page/multiUserActivity/multiPage.dart';
+import 'package:mvvm_flutter/ui/page/myFavorite/myFavoritePage.dart';
 import 'package:mvvm_flutter/utils/componentUi/card_view.dart';
 import '../di/injection.dart' as di;
 import '../ui/bloc/SingleUser/SingleUserBloc.dart';
@@ -50,6 +51,13 @@ class AppRoute {
     Widget nextScreen = BlocProvider(
         create: (context) => di.locator<CreateUserBloc>(),
         child: const AddUserPage());
+    return nextScreen;
+  }
+
+  static Widget myFavoritePage() {
+    Widget nextScreen = BlocProvider(
+        create: (context) => di.locator<FavoriteUserBloc>(),
+        child: const MyFavoritePage());
     return nextScreen;
   }
 

@@ -54,7 +54,7 @@ class UserCard extends StatelessWidget {
                       children: [
                         Text("ID : ${user.id}"),
                         Text("Nama : ${user.firstName} ${user.lastName}"),
-                        Text("ID : ${user.email}"),
+                        Text("Email : ${user.email}"),
                       ],
                     )
                   ],

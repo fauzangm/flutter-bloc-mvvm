@@ -7,6 +7,7 @@ import 'package:mvvm_flutter/data/remote/model/DataUser.dart';
 import 'package:mvvm_flutter/data/remote/response/LoginResponse.dart';
 import 'package:mvvm_flutter/data/repository/user/UserRepository.dart';
 import 'package:mvvm_flutter/domain/usecase/clearDatabaseFavorite.dart';
+import 'package:mvvm_flutter/domain/usecase/getFavoriteUseCase.dart';
 import 'package:mvvm_flutter/domain/usecase/getMultiUser.dart';
 import 'package:mvvm_flutter/domain/usecase/insertFavoritemItem.dart';
 import 'package:mvvm_flutter/utils/constant.dart';
@@ -19,18 +20,28 @@ part 'FavoriteState.dart';
 class FavoriteUserBloc extends Bloc<FavoriteUserEvent, FavoriteItemState> {
   final InsertFavoriteItem insertFavoriteItem;
   final ClearDBFavoriteUseCase clearDBFavoriteUseCase;
+  final GetFavoriteUseCase getFavoriteUseCase;
 
-  FavoriteUserBloc(this.insertFavoriteItem, this.clearDBFavoriteUseCase)
+  FavoriteUserBloc(this.insertFavoriteItem, this.clearDBFavoriteUseCase,
+      this.getFavoriteUseCase)
       : super(FavoriteInitial()) {
     on<InsertFavoriteEvent>(_onInsertFavoriteEvent);
     on<FavoriteEventClick>(_onEventFavoriteClick);
     on<ClearDbFavoriteEvent>(_onClearDbFavoriteEvent);
+    on<GetFavoriteEvent>(_onGetFavoriteEvent);
   }
 
   Future<void> _onEventFavoriteClick(
       FavoriteEventClick event, Emitter<FavoriteItemState> emit) async {
     emit(const FavoriteStateClicked());
     emit(FavoriteInitial());
+  }
+
+  Future<void> _onGetFavoriteEvent(
+      GetFavoriteEvent event, Emitter<FavoriteItemState> emit) async {
+    var resultData = await getFavoriteUseCase.execute();
+    resultData.fold(
+        (l) => emit(FavoriteError(l)), (r) => emit(GetFavoriteSucces(data: r)));
   }
 
   Future<void> _onClearDbFavoriteEvent(

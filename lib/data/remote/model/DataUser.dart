@@ -1,13 +1,17 @@
+import 'dart:math';
+
+import 'package:equatable/equatable.dart';
+
 import '../../../utils/constant.dart';
 
-class Data {
+class Data extends Equatable {
   int? id;
   String? email;
   String? firstName;
   String? lastName;
   String? avatar;
 
-  Data({this.id, this.email, this.firstName, this.lastName, this.avatar});
+  Data({this.id = 0, this.email, this.firstName, this.lastName, this.avatar});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -38,7 +42,7 @@ class Data {
   }
 
   factory Data.fromMap(Map<String, dynamic> map) => Data(
-        id: map[FieldRes.id],
+        // id: map[FieldRes.id] ?? Random().nextInt(10),
         email: map[FieldRes.email],
         firstName: map[FieldRes.firstName],
         lastName: map[FieldRes.lastName],
@@ -46,13 +50,21 @@ class Data {
       );
 
   static String createTableQuery() => '''CREATE TABLE ${TableRes.menu} (
-      ${FieldRes.id} TEXT PRIMARY KEY,
+      ${FieldRes.id} INTEGER PRIMARY KEY,
       ${FieldRes.avatar} TEXT,
        ${FieldRes.email} TEXT,
       ${FieldRes.firstName} TEXT,
       ${FieldRes.lastName} TEXT
       )
       ''';
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id, avatar, email, firstName, lastName];
+  //         @override
+  // List<Object?> get props => [
+  //   amount, id, image, name, note, price, storeId, totalPrice, unit
+  // ];
 
 //       final String createTableQuery = '''
 //   CREATE TABLE favorite (
