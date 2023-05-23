@@ -1,7 +1,10 @@
-abstract class FavoriteEvent {}
+part of 'LoginUserBloc.dart';
 
-class ToggleFavoriteEvent extends FavoriteEvent {
-  final bool isFavorite;
+abstract class FavoriteUserEvent {}
 
-  ToggleFavoriteEvent(this.isFavorite);
+class InsertFavoriteEvent extends FavoriteUserEvent {
+  final Data data;
+  InsertFavoriteEvent(this.data);
 }
+
+class FavoriteEventClick extends FavoriteUserEvent {}
