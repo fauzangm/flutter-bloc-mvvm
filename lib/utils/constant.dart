@@ -9,3 +9,5 @@ class FieldRes {
   static const String lastName = 'lastName';
   static const String avatar = 'avatar';
 }
+
+const String succesDeletAllDB = 'Berhasil Menghapus Seluruh Item';

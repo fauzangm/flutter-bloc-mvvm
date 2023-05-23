@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mvvm_flutter/ui/bloc/FavoriteItem/FavoriteBloc.dart';
 import '../../bloc/MultiUser/MultiUserBloc.dart';
 import 'package:mvvm_flutter/common/color.dart';
 import 'package:mvvm_flutter/data/remote/response/MultiUser.dart';
@@ -27,6 +28,8 @@ class _MultiPageState extends State<MultiPage> {
   Widget build(BuildContext context) {
     MultiUserBloc multiUserViewModel = BlocProvider.of<MultiUserBloc>(context);
 
+    FavoriteUserBloc favoriteViewModel =
+        BlocProvider.of<FavoriteUserBloc>(context);
     void _onGetMultiUserEvent(MultiUser multiUser) {
       BlocProvider.of<MultiUserBloc>(context)
           .add(GetMultiUserEvent(idpage: random.nextInt(3)));
@@ -62,6 +65,7 @@ class _MultiPageState extends State<MultiPage> {
                 ),
                 GetMultiUser(
                   multiUser: _onGetMultiUserEvent,
+                  favoriteViewModel: favoriteViewModel,
                 )
               ],
             );
@@ -83,9 +87,12 @@ class _MultiPageState extends State<MultiPage> {
 
 class GetMultiUser extends StatelessWidget {
   final Function(MultiUser) multiUser;
+
+  final FavoriteUserBloc favoriteViewModel;
   const GetMultiUser({
     super.key,
     required this.multiUser,
+    required this.favoriteViewModel,
   });
 
   @override
@@ -111,7 +118,7 @@ class GetMultiUser extends StatelessWidget {
                     width: 280,
                     child: const Text(
                       "Gagal Menghubungi Server, Harap Periksa Koneksi Internet Kamu",
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),

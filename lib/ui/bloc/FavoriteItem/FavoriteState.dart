@@ -1,4 +1,4 @@
-part of 'LoginUserBloc.dart';
+part of 'FavoriteBloc.dart';
 
 abstract class FavoriteItemState extends Equatable {
   const FavoriteItemState();
@@ -14,19 +14,19 @@ class FavoriteStateClicked extends FavoriteItemState {
 
 class FavoriteLoading extends FavoriteItemState {}
 
-class FavoriterSucces extends FavoriteItemState {
-  final Data user;
+class FavoriteSucces extends FavoriteItemState {
+  final String succes;
 
-  LoginUserSucces({required this.user});
+  const FavoriteSucces({required this.succes});
 
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [succes];
 }
 
-class LoginUserError extends FavoriteItemState {
+class FavoriteError extends FavoriteItemState {
   final String message;
 
-  LoginUserError(this.message);
+  FavoriteError(this.message);
 
   @override
   List<Object> get props => [message];

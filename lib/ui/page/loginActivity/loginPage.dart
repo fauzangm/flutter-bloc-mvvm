@@ -4,6 +4,7 @@ import 'package:mvvm_flutter/main.dart';
 import 'package:mvvm_flutter/ui/bloc/LoginUser/LoginUserBloc.dart';
 import 'package:mvvm_flutter/ui/page/singleUserActivity/single.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mvvm_flutter/utils/appRoute.dart';
 
 import 'component/LoginForm.dart';
 
@@ -46,11 +47,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (BuildContext context) {
-                        return const MyApp();
-                      }),
-                    );
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                AppRoute.singleUserActivity()),
+                        (route) => false);
                   },
                   child: const SafeArea(
                       child: Padding(

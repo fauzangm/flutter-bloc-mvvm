@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvvm_flutter/data/remote/model/DataUser.dart';
 import 'package:mvvm_flutter/ui/bloc/CreateUser/CreateUserBloc.dart';
-import 'package:mvvm_flutter/ui/bloc/FavoriteItem/Favorite_bloc.dart';
+import 'package:mvvm_flutter/ui/bloc/FavoriteItem/FavoriteBloc.dart';
 import 'package:mvvm_flutter/ui/bloc/LoginUser/LoginUserBloc.dart';
 import 'package:mvvm_flutter/ui/bloc/MultiUser/MultiUserBloc.dart';
 import 'package:mvvm_flutter/ui/page/addUser/addUserPage.dart';
@@ -15,16 +15,34 @@ import '../ui/page/singleUserActivity/single.dart';
 
 class AppRoute {
   static Widget singleUserActivity() {
-    Widget nextScreen = BlocProvider(
-        create: (context) => di.locator<SingleUserBloc>(),
-        child: const SinglePage());
+    Widget nextScreen = MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => di.locator<SingleUserBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<FavoriteUserBloc>(),
+        ),
+      ],
+      child: SinglePage(),
+    );
+
     return nextScreen;
   }
 
   static Widget multiUserActivity() {
-    Widget nextScreen = BlocProvider(
-        create: (context) => di.locator<MultiUserBloc>(),
-        child: const MultiPage());
+    Widget nextScreen = MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => di.locator<MultiUserBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<FavoriteUserBloc>(),
+        ),
+      ],
+      child: MultiPage(),
+    );
+
     return nextScreen;
   }
 
@@ -34,6 +52,22 @@ class AppRoute {
         child: const AddUserPage());
     return nextScreen;
   }
+
+  // static Widget favoriteWidget() {
+  //   Widget nextScreen = BlocProvider(
+  //     create: (context) => di.locator<FavoriteUserBloc>(),
+  //     child: const SinglePage(),
+  //   );
+  //   return nextScreen;
+  // }
+
+  // static Widget favoriteWidgetMultiPage() {
+  //   Widget nextScreen = BlocProvider(
+  //     create: (context) => di.locator<FavoriteUserBloc>(),
+  //     child: const MultiPage(),
+  //   );
+  //   return nextScreen;
+  // }
 
   // static Widget userCard() {
   //   Widget nextScreen = BlocProvider(
