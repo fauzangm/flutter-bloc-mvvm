@@ -31,6 +31,18 @@ class FavoriteUserBloc extends Bloc<FavoriteUserEvent, FavoriteItemState> {
     on<GetFavoriteEvent>(_onGetFavoriteEvent);
   }
 
+//   lass SingleUserBloc extends Bloc<SingleUserEvent, SingleUserState> {
+//   final GetSingleUser getSingleUser;
+//   SingleUserBloc(this.getSingleUser) : super(SingleUserInitial()) {
+//     on<GetSingleUserEvent>((event, emit) async {
+//       emit(SingleUserLoading());
+//       final resultData = await getSingleUser.execute(event.idUser);
+//       resultData.fold((l) => emit(SingleUserError(l)),
+//           (r) => emit(SingleUserSucces(user: r)));
+//     });
+//   }
+// }
+
   Future<void> _onEventFavoriteClick(
       FavoriteEventClick event, Emitter<FavoriteItemState> emit) async {
     emit(const FavoriteStateClicked());
@@ -39,9 +51,12 @@ class FavoriteUserBloc extends Bloc<FavoriteUserEvent, FavoriteItemState> {
 
   Future<void> _onGetFavoriteEvent(
       GetFavoriteEvent event, Emitter<FavoriteItemState> emit) async {
+    print("GetFavoriteData");
     var resultData = await getFavoriteUseCase.execute();
     resultData.fold(
-        (l) => emit(FavoriteError(l)), (r) => emit(GetFavoriteSucces(data: r)));
+      (l) => emit(FavoriteError(l)),
+      (r) => emit(GetFavoriteSucces(data: r)),
+    );
   }
 
   Future<void> _onClearDbFavoriteEvent(
@@ -53,6 +68,7 @@ class FavoriteUserBloc extends Bloc<FavoriteUserEvent, FavoriteItemState> {
 
   Future<void> _onInsertFavoriteEvent(
       InsertFavoriteEvent event, Emitter<FavoriteItemState> emit) async {
+    print("insertData");
     var resultData = await insertFavoriteItem.execute(event.data);
     resultData.fold((l) => emit(FavoriteError(l)),
         (r) => emit(const FavoriteSucces(succes: 'Berhasil Save Favorite')));
