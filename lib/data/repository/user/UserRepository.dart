@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
-import 'package:mvvm_flutter/common/exception.dart';
 import 'package:mvvm_flutter/data/remote/api_service.dart';
 import 'package:mvvm_flutter/data/remote/response/CreateAkunResponse.dart';
 import 'package:mvvm_flutter/domain/repository/user/UserRepository.dart';

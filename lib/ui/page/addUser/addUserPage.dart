@@ -155,7 +155,7 @@ class _addUserPageState extends State<AddUserPage> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 120,
                     child: Stack(
                       children: [

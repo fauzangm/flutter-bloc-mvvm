@@ -8,6 +8,7 @@ class GetFavoriteUseCase {
   GetFavoriteUseCase(this.favoriteRepository);
 
   Future<Either<String, List<Data>>> execute() {
+    print("masuk use case get data");
     return favoriteRepository.getFavorite();
   }
 }

@@ -7,16 +7,17 @@ import '../../../utils/constant.dart';
 class Data extends Equatable {
   int? id;
   String? email;
-  String? firstName;
+  String? first_name;
   String? lastName;
   String? avatar;
+  bool isFavorite = false;
 
-  Data({this.id = 0, this.email, this.firstName, this.lastName, this.avatar});
+  Data({this.id = 0, this.email, this.first_name, this.lastName, this.avatar});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     email = json['email'];
-    firstName = json[FieldRes.firstName];
+    first_name = json[FieldRes.firstName];
     lastName = json[FieldRes.lastName];
     avatar = json['avatar'];
   }
@@ -25,7 +26,7 @@ class Data extends Equatable {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['email'] = this.email;
-    data[FieldRes.firstName] = this.firstName;
+    data[FieldRes.firstName] = this.first_name;
     data[FieldRes.lastName] = this.lastName;
     data['avatar'] = this.avatar;
     return data;
@@ -35,7 +36,7 @@ class Data extends Equatable {
     return {
       'id': id,
       'email': email,
-      FieldRes.firstName: firstName,
+      FieldRes.firstName: first_name,
       FieldRes.lastName: lastName,
       'avatar': avatar,
     };
@@ -44,7 +45,7 @@ class Data extends Equatable {
   factory Data.fromMap(Map<String, dynamic> map) => Data(
         // id: map[FieldRes.id] ?? Random().nextInt(10),
         email: map[FieldRes.email],
-        firstName: map[FieldRes.firstName],
+        first_name: map[FieldRes.firstName],
         lastName: map[FieldRes.lastName],
         avatar: map[FieldRes.avatar],
       );
@@ -60,7 +61,7 @@ class Data extends Equatable {
 
   @override
   // TODO: implement props
-  List<Object?> get props => [id, avatar, email, firstName, lastName];
+  List<Object?> get props => [id, avatar, email, first_name, lastName];
   //         @override
   // List<Object?> get props => [
   //   amount, id, image, name, note, price, storeId, totalPrice, unit

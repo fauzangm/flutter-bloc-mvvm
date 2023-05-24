@@ -21,6 +21,7 @@ class LocalDataSource {
   Future<List<Data>> getFavoriteItem() async {
     try {
       List<Map<String, dynamic>> result = await _databaseHelper.getDataList();
+      print("get data di localdb $result");
       return result.map((e) => Data.fromMap(e)).toList();
     } catch (e) {
       rethrow;

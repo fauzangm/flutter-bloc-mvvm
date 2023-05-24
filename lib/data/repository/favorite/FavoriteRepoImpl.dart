@@ -13,6 +13,7 @@ class FavoriteRepositoryImpl implements FavoriteRepository {
   @override
   Future<Either<String, List<Data>>> getFavorite() async {
     try {
+      print("Get data di repository");
       List<Data> result = await _local.getFavoriteItem();
       return Right(result);
     } catch (e) {
@@ -26,6 +27,7 @@ class FavoriteRepositoryImpl implements FavoriteRepository {
       _local.insertFavoriteItem(item);
       return Right("Berhasil Save Favorite $item");
     } catch (e) {
+      print(e);
       return Left(e.toString());
     }
   }

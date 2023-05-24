@@ -83,7 +83,7 @@ class _MyFavoritePageState extends State<MyFavoritePage> {
             return ListView.builder(
               itemCount: state.data.length,
               itemBuilder: (context, index) {
-                var imgVariable = AssetImage("assets/image/fauzangm.jpeg");
+                var imgVariable = AssetImage("assets/image/profiledefault.png");
                 return Container(
                   width: double.infinity,
                   margin: const EdgeInsets.all(20),
@@ -116,7 +116,7 @@ class _MyFavoritePageState extends State<MyFavoritePage> {
                             children: [
                               // Text("ID : ${state.data[index].id.toString()}"),
                               Text(
-                                  "Nama : ${state.data[index].firstName.toString()} ${state.data[index].lastName.toString()}"),
+                                  "Nama : ${state.data[index].first_name.toString()} ${state.data[index].lastName.toString()}"),
                               Text(
                                   "Email : ${state.data[index].email.toString()}"),
                             ],

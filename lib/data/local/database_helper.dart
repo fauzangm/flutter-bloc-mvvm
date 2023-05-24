@@ -15,11 +15,11 @@ class DatabaseHelper {
   static Database? _database;
 
   Future<Database> get database async => _database ??= await initializeDb();
-
+  /** Mengganti nama DB dan update version */
   Future<Database> initializeDb() async {
     String path = await getDatabasesPath();
-    Database database = await openDatabase('$path/favorite.db',
-        onCreate: _onCreate, version: 4);
+    Database database = await openDatabase('$path/${TableRes.menu}.db',
+        onCreate: _onCreate, version: 2);
     return database;
   }
 
@@ -48,12 +48,5 @@ class DatabaseHelper {
     Database db = await database;
     List<Map<String, dynamic>> allFavorite = await db.query(TableRes.menu);
     return allFavorite;
-
-    // return await db.query(
-    //   tableName,
-    //   columns: columns,
-    //   where: where,
-    //   whereArgs: whereArgs,
-    // );
   }
 }

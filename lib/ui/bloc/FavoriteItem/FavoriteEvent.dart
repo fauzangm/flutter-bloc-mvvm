@@ -8,7 +8,7 @@ abstract class FavoriteUserEvent extends Equatable {
 
 class InsertFavoriteEvent extends FavoriteUserEvent {
   final Data data;
-  InsertFavoriteEvent(this.data);
+  const InsertFavoriteEvent(this.data);
   @override
   List<Object?> get props => [data];
 }

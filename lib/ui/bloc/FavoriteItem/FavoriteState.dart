@@ -26,7 +26,7 @@ class FavoriteSucces extends FavoriteItemState {
 class GetFavoriteSucces extends FavoriteItemState {
   final List<Data> data;
 
-  GetFavoriteSucces({required this.data});
+  const GetFavoriteSucces({required this.data});
 
   @override
   List<Object> get props => [data];
@@ -35,7 +35,7 @@ class GetFavoriteSucces extends FavoriteItemState {
 class FavoriteError extends FavoriteItemState {
   final String message;
 
-  FavoriteError(this.message);
+  const FavoriteError(this.message);
 
   @override
   List<Object> get props => [message];
