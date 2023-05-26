@@ -54,30 +54,12 @@ class __SingleUserPageState extends State<_SingleUserPage> {
     await prefs.remove('isToken');
   }
 
-  // void initState() {
-  //   super.initState();
-  //   clearDbFavorite(); // Panggil fungsi di sini
-  // }
-
-  // void clearDbFavorite() {
-  //   FavoriteUserBloc favoriteViewModel =
-  //       BlocProvider.of<FavoriteUserBloc>(context);
-  //   favoriteViewModel.add(ClearDbFavoriteEvent());
-  // }
-
   @override
   Widget build(BuildContext context) {
     final Random random = Random();
     late bool islogin;
 
-    return
-        // MultiBlocListener(
-        //   listeners: const [
-        //     BlocListener<FavoriteUserBloc, FavoriteItemState>(
-        //         listener: _onFavoriteListener)
-        //   ],
-        //   child:
-        Scaffold(
+    return Scaffold(
       appBar: AppBar(
           backgroundColor: colorPrimary,
           shape: const RoundedRectangleBorder(
@@ -230,60 +212,5 @@ class __SingleUserPageState extends State<_SingleUserPage> {
         ),
       ),
     );
-    // );
   }
 }
-
-// Future<void> _onFavoriteListener(
-//     BuildContext context, FavoriteItemState state) async {
-//   if (state is FavoriteSucces) {
-//     ScaffoldMessenger.of(context).showSnackBar(
-//       SnackBar(
-//         backgroundColor: colorPrimary,
-//         duration: const Duration(seconds: 5),
-//         //behavior mengatur jenis snackbar
-//         behavior: SnackBarBehavior.fixed,
-//         shape: RoundedRectangleBorder(
-//           borderRadius: BorderRadius.circular(20),
-//         ),
-//         content: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             const Icon(Icons.info_outline),
-//             Container(
-//               padding: const EdgeInsets.all(10),
-//               width: 280,
-//               child: Text(
-//                 state.succes,
-//                 maxLines: 2,
-//                 overflow: TextOverflow.ellipsis,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class snackbar extends StatelessWidget {
-//   const snackbar({super.key, required this.message});
-//   final String message;
-//   @override
-//   Widget build(BuildContext context) {
-//     final scaffoldMessenger = ScaffoldMessenger.of(context);
-//     return Scaffold(
-//       body: Expanded(child: scaffoldMessenger.showSnackBar(SnackBar(content: Text("sss"))),)
-//     );
-//   }
-// }
-               // SnackBar(
-                //   content: Text('Data berhasil disimpan.'),
-                //   backgroundColor: Colors.green,
-                //   duration: Duration(seconds: 3),
-                //   action: SnackBarAction(
-                //     label: 'BATAL',
-                //     textColor: Colors.white,
-                //     onPressed: () {},
-                //   ),
-                // ),

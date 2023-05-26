@@ -20,26 +20,16 @@ class _UserCardState extends State<UserCard> {
 
   _UserCardState(this.data);
   @override
-  // void initState() {
-  //   // Future.microtask(
-  //   //     () => context.read<FavoriteUserBloc>().add(GetFavoriteEvent()));
-
-  //   BlocProvider.of<FavoriteUserBloc>(context).add(GetFavoriteEvent());
-  //   super.initState();
-  // }
-
   Widget build(BuildContext context) {
     bool isSameData = false;
-    print("build UserCard");
+
     Future<void> _onSaveFavoriteListener(
         BuildContext context, FavoriteItemState state) async {
-      print("masuk listener $state");
       if (state is FavoriteStateClicked) {
         if (data.isFavorite == false && isSameData == false) {
           BlocProvider.of<FavoriteUserBloc>(context)
               .add(InsertFavoriteEvent(data));
           data.isFavorite = true;
-          print("favorite onclick ${data.isFavorite}");
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -96,16 +86,6 @@ class _UserCardState extends State<UserCard> {
             ),
           ),
         );
-      } else if (state is GetFavoriteSucces) {
-        // print("succes GetFavorite");
-        state.data.forEach((element) {
-          // print("ketika foreach $element dan $data");
-          if (data.email == element.email) {
-            isSameData = true;
-            // print("result true $isSameData");
-          }
-          print("result false $isSameData");
-        });
       }
     }
 
@@ -191,37 +171,3 @@ class _UserCardState extends State<UserCard> {
         });
   }
 }
-
-
-// class FavoriteWidget extends StatelessWidget {
-//   final Data user;
-//   // final Function() toggleFavorite;
-
-//   FavoriteWidget({required this.user});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // if (state is FavoriteStateClicked) {
-//     //   isFavorite = true;
-//     // }
-//     print("data ${user.isFavorite}");
-//     return Transform.translate(
-//       offset: Offset(0.0, -10.0),
-//       child: Container(
-//         height: 20,
-//         child: IconButton(
-//           icon: Icon(
-//             user.isFavorite ? Icons.favorite : Icons.favorite_border,
-//             color: user.isFavorite ? Colors.red : null,
-//           ),
-//           onPressed: () {
-//             print("lenght ${user.toString()}");
-
-//             BlocProvider.of<FavoriteUserBloc>(context)
-//                 .add(FavoriteEventClick());
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
