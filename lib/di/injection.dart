@@ -46,7 +46,7 @@ void init() {
 
   //Repository
   locator.registerLazySingleton<UserRepository>(
-      () => UserRepositoryImpl(locator(), locator()));
+      () => UserRepositoryImpl(locator(), locator(), locator()));
 
   locator.registerLazySingleton<LoginRepository>(
       () => LoginRepositoryImpl(locator(), locator()));

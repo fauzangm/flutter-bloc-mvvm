@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvvm_flutter/ui/bloc/FavoriteItem/FavoriteBloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/local/local_data_source.dart';
+import '../../../data/remote/model/DataUser.dart';
 import '../../bloc/SingleUser/SingleUserBloc.dart';
 import 'package:mvvm_flutter/common/color.dart';
 import 'package:mvvm_flutter/ui/page/loginActivity/loginPage.dart';
@@ -220,9 +221,6 @@ class __SingleUserPageState extends State<_SingleUserPage> {
               }
 
               if (state is SingleUserSucces) {
-                print("succes");
-                FavoriteUserBloc favoriteViewModel =
-                    BlocProvider.of<FavoriteUserBloc>(context);
                 return UserCard(state.user.data!);
               }
 

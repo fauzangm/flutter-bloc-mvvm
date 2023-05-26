@@ -6,16 +6,34 @@ import 'package:mvvm_flutter/ui/bloc/FavoriteItem/FavoriteBloc.dart';
 
 import '../../data/remote/model/DataUser.dart';
 
-class UserCard extends StatelessWidget {
+class UserCard extends StatefulWidget {
   final Data data;
-  bool isSameData = false;
+
   UserCard(this.data);
 
   @override
+  State<UserCard> createState() => _UserCardState(data);
+}
+
+class _UserCardState extends State<UserCard> {
+  final Data data;
+
+  _UserCardState(this.data);
+  @override
+  // void initState() {
+  //   // Future.microtask(
+  //   //     () => context.read<FavoriteUserBloc>().add(GetFavoriteEvent()));
+
+  //   BlocProvider.of<FavoriteUserBloc>(context).add(GetFavoriteEvent());
+  //   super.initState();
+  // }
+
   Widget build(BuildContext context) {
+    bool isSameData = false;
     print("build UserCard");
     Future<void> _onSaveFavoriteListener(
         BuildContext context, FavoriteItemState state) async {
+      print("masuk listener $state");
       if (state is FavoriteStateClicked) {
         if (data.isFavorite == false && isSameData == false) {
           BlocProvider.of<FavoriteUserBloc>(context)
@@ -79,16 +97,15 @@ class UserCard extends StatelessWidget {
           ),
         );
       } else if (state is GetFavoriteSucces) {
-        print("succes GetFavorite");
+        // print("succes GetFavorite");
         state.data.forEach((element) {
-          print("ketika foreach $element dan $data");
+          // print("ketika foreach $element dan $data");
           if (data.email == element.email) {
             isSameData = true;
-            print("result true $isSameData");
+            // print("result true $isSameData");
           }
           print("result false $isSameData");
         });
-        BlocProvider.of<FavoriteUserBloc>(context).add(GetFavoriteEvent());
       }
     }
 
@@ -97,7 +114,6 @@ class UserCard extends StatelessWidget {
         listener: _onSaveFavoriteListener,
         builder: (context, state) {
           print("build bloc");
-          BlocProvider.of<FavoriteUserBloc>(context).add(GetFavoriteEvent());
           return Container(
             width: double.infinity,
             margin: const EdgeInsets.all(20),
